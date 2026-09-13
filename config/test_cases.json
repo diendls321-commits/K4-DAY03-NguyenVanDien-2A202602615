@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Chào bạn, bạn có thể giới thiệu các loại hình nghỉ phép cơ bản và quy định thời gian làm việc tại VinFast không?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ thông tin nền (System Prompt), không cần gọi bất kỳ Tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu số ngày phép còn lại của nhân viên mã VF12345 giúp tôi.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu, tự động phát sinh Tool Call 'check_leave_balance' với tham số mã nhân viên là VF12345.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "leave_request",
+    "question": "Tôi là Nguyễn Văn A, mã nhân viên VF12345. Hãy tạo đơn xin nghỉ phép năm cho tôi vào ngày 25/10/2026.",
+    "expected_behavior": "Agent tự động phát sinh Tool Call 'create_leave_request' với đúng thời gian nghỉ, loại phép và thông tin mã nhân viên.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Tôi (Mã NV: VF12345) muốn xin nghỉ ốm từ ngày 01/11 đến 03/11/2026. Hãy kiểm tra xem tôi còn đủ ngày phép ốm hưởng nguyên lương không, nếu còn hãy tạo đơn giúp tôi.",
+    "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct: Gọi Tool tra cứu quỹ phép của nhân viên trước -> Kiểm tra quỹ phép ốm có đủ 3 ngày không -> Gọi Tool tạo đơn xin nghỉ phép nếu điều kiện thoả mãn.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Kiểm tra giúp tôi số ngày phép năm còn lại của nhân viên mã VF9999999.",
+    "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool do mã nhân viên không tồn tại, sau đó đưa ra phản hồi lịch sự yêu cầu kiểm tra lại mã nhân viên, tuyệt đối không bịa đặt dữ liệu quỹ phép.",
+    "complexity": "Medium"
+  }
+]

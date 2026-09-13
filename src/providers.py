@@ -15,7 +15,7 @@ if sys.stdout.encoding != 'utf-8':
     except Exception:
         pass
 
-load_dotenv()
+load_dotenv(override=True)
 
 class BaseLLMProvider:
     """Interface cơ sở cho các LLM Provider hỗ trợ Native Tool Calling"""
@@ -32,31 +32,46 @@ class MockOfflineProvider(BaseLLMProvider):
         self.model_name = "Offline-Mock-Model-2026"
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
-        return f"[Mock Chatbot Response]: Xin chào! Tôi đã nhận được câu hỏi '{prompt}'. (Chế độ Chatbot không có Tool tra cứu dữ liệu thời gian thực)."
+        return f"[Mock Chatbot Response]: Xin chào! Tôi đã nhận được câu hỏi '{prompt}'. (Chế độ Chatbot không có Tool tra cứu hệ thống HR thời gian thực)."
 
     def generate_with_tools(self, prompt: str, tools_schema: List[Dict[str, Any]], system_prompt: str = "") -> Dict[str, Any]:
         prompt_lower = prompt.lower()
-        
-        # Mô phỏng nhận diện intent gọi Tool
-        if "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
+
+        # --- ĐOẠN CODE THÊM MỚI: Xử lý Multi-step cho Mock ---
+        if "[kết quả trả về từ hệ thống (observation)]" in prompt_lower:
             return {
-                "type": "tool_call",
-                "tool_name": "schedule_appointment",
-                "arguments": {"student_id": "SV2026001", "datetime_str": "14:00 15/09/2026", "advisor_name": "PGS.TS Nguyễn Văn A"},
-                "thought": "Người dùng yêu cầu đặt lịch hẹn tư vấn cho sinh viên SV2026001. Tôi sẽ gọi tool schedule_appointment."
+                "type": "text",
+                "content": "[Mock Agent Response]: Dựa trên dữ liệu hệ thống, tôi đã hoàn tất yêu cầu của bạn.",
+                "thought": "Đã có dữ liệu Observation ở step trước, dừng vòng lặp và xuất câu trả lời."
             }
-        elif "sv2026001" in prompt_lower or "tra cứu" in prompt_lower:
+        # --- KẾT THÚC ĐOẠN THÊM MỚI ---
+        
+        # Mô phỏng nhận diện intent gọi Tool cho Trợ lý Nhân sự
+        if "vf12345" in prompt_lower and ("tạo đơn" in prompt_lower or "xin nghỉ" in prompt_lower):
             return {
                 "type": "tool_call",
-                "tool_name": "academic_query",
-                "arguments": {"student_id": "SV2026001"},
-                "thought": "Người dùng muốn tra cứu thông tin học vụ của sinh viên SV2026001. Tôi sẽ gọi tool academic_query."
+                "tool_name": "create_leave_request",
+                "arguments": {
+                    "employee_id": "VF12345", 
+                    "leave_type": "Phép năm", 
+                    "start_date": "25/10/2026", 
+                    "end_date": "27/10/2026", 
+                    "reason": "Việc gia đình"
+                },
+                "thought": "Người dùng yêu cầu tạo đơn xin nghỉ phép cho nhân viên VF12345. Tôi sẽ gọi tool create_leave_request."
+            }
+        elif "vf12345" in prompt_lower or "kiểm tra" in prompt_lower or "tra cứu" in prompt_lower:
+            return {
+                "type": "tool_call",
+                "tool_name": "check_leave_balance",
+                "arguments": {"employee_id": "VF12345"},
+                "thought": "Người dùng muốn tra cứu số ngày phép còn lại của nhân viên VF12345. Tôi sẽ gọi tool check_leave_balance."
             }
         else:
             return {
                 "type": "text",
-                "content": f"[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-                "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool."
+                "content": f"[Mock Agent Response]: Xin chào! Theo quy định nhân sự hiện hành của VinFast, nhân viên làm việc đủ 12 tháng sẽ được nghỉ 12 ngày phép năm hưởng nguyên lương.",
+                "thought": "Câu hỏi chung về quy định nhân sự, trả lời trực tiếp không cần gọi Tool."
             }
 
 
@@ -64,7 +79,7 @@ class GeminiProvider(BaseLLMProvider):
     """Google Gemini Provider (Native Tool Calling với Google GenAI SDK)"""
     def __init__(self, api_key: str = None, model: str = None):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-        self.model_name = model or os.getenv("LLM_MODEL") or "gemini-2.5-flash"
+        self.model_name = model or os.getenv("LLM_MODEL") or "gemini-3.5-flash-lite"
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
         if not self.api_key or self.api_key == "your_gemini_api_key_here":

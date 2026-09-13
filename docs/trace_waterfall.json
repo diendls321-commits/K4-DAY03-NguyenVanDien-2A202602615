@@ -1,29 +1,156 @@
 [
   {
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
+    "query": "Chào bạn, bạn có thể giới thiệu các loại hình nghỉ phép cơ bản và quy định thời gian làm việc tại VinFast không?",
     "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào bạn! Tôi là Trợ lý Tác tử Nhân sự Thông minh của VinFast. Dưới đây là thông tin chi tiết về các loại hình nghỉ phép cơ bản và quy định thời gian làm việc tại tập đoàn VinFast:\n\n### 1. Các loại hình nghỉ phép cơ bản\nTheo chính sách nhân sự của VinFast (tuân thủ Bộ luật Lao động Việt Nam và quy định nội bộ):\n* **Phép năm (Annual Leave):** Nhân viên làm việc đủ 12 tháng được hưởng 12 ngày phép năm (đối với điều kiện làm việc bình thường). Số ngày phép sẽ tăng theo thâm niên làm việc hoặc được tính tương ứng theo số tháng làm việc thực tế trong năm nếu chưa đủ 1 năm.\n* **Nghỉ ốm (Sick Leave):** Nhân viên được nghỉ và hưởng chế độ bảo hiểm xã hội (hoặc lương theo quy định nội bộ) khi có giấy chứng nhận nghỉ việc hưởng BHXH từ cơ sở khám chữa bệnh có thẩm quyền.\n* **Nghỉ việc riêng có hưởng lương (Personal Leave with Pay):** Áp dụng cho các sự kiện cá nhân quan trọng như kết hôn (3 ngày), con kết hôn (1 ngày), người thân ruột thịt mất (bố mẹ, vợ/chồng, con: 3 ngày)...\n* **Nghỉ không lương (Unpaid Leave):** Áp dụng khi nhân viên đã sử dụng hết phép năm và có nhu cầu giải quyết việc cá nhân, cần được sự đồng ý của quản lý trực tiếp và bộ phận Nhân sự.\n* **Nghỉ thai sản (Maternity Leave):** Dành cho lao động nữ (thường là 6 tháng) và chế độ cho lao động nam khi vợ sinh con theo quy định pháp luật hiện hành.\n\n---\n\n### 2. Quy định thời gian làm việc tại VinFast\n* **Thời gian làm việc tiêu chuẩn:** \n  * Thông thường là **8 giờ/ngày** và **40 - 44 giờ/tuần** (tùy thuộc vào khối lượng công việc và đặc thù vị trí khối Văn phòng hay Khối Sản xuất/Nhà máy).\n  * Khối Văn phòng: Thường làm việc từ thứ Hai đến thứ Sáu (hoặc sáng thứ Bảy tùy bộ phận).\n  * Khối Nhà máy/Sản xuất: Tổ chức theo ca sản xuất (Ca 1, Ca 2, Ca 3) để đảm bảo dây chuyền vận hành liên tục.\n* **Thời gian nghỉ giữa giờ:** Nhân viên được nghỉ giữa giờ (thường là 30 phút đến 1 tiếng cho ca làm việc ban ngày, bao gồm thời gian ăn trưa).\n* **Làm thêm giờ (Overtime):** Được áp dụng khi có nhu cầu sản xuất/kinh doanh cấp thiết, tuân thủ đúng giới hạn số giờ làm thêm tối đa theo quy định của pháp luật lao động và được cấp có thẩm quyền phê duyệt trước.\n\n---\n\n*Nếu bạn cần tra cứu số ngày phép còn lại của bản thân hoặc muốn tạo đơn xin nghỉ phép trên hệ thống HRIS, vui lòng cung cấp **Mã nhân viên** (ví dụ: `VF12345`) để tôi hỗ trợ nhé!*",
+    "latency_ms": 5237.94
   },
   {
     "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu số ngày phép còn lại của nhân viên mã VF12345 giúp tôi.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "check_leave_balance",
     "arguments": {
-      "student_id": "SV2026001"
+      "employee_id": "VF12345"
     },
-    "observation": {},
-    "latency_ms": 799.12
+    "observation": {
+      "status": "SUCCESS",
+      "employee_id": "VF12345",
+      "data": {
+        "full_name": "Nguyễn Văn A",
+        "department": "Khối Sản xuất - Xưởng Pin",
+        "position": "Kỹ sư tự động hóa",
+        "email": "a.nv@vinfast.vn",
+        "status": "Đang làm việc",
+        "leave_balance": {
+          "annual_leave": 12,
+          "sick_leave": 5,
+          "unpaid_leave": 30
+        }
+      }
+    },
+    "latency_ms": 1571.97
   },
   {
     "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
+    "query": "Hãy tra cứu số ngày phép còn lại của nhân viên mã VF12345 giúp tôi.",
     "action_type": "FINAL_ANSWER",
-    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
-    "latency_ms": 10.0
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Dựa trên kết quả tra cứu từ hệ thống nhân sự VinFast, dưới đây là thông tin chi tiết về số ngày phép còn lại của nhân viên **Nguyễn Văn A** (Mã nhân viên: **VF12345**):\n\n* **Họ và tên:** Nguyễn Văn A\n* **Phòng ban:** Khối Sản xuất - Xưởng Pin\n* **Chức vụ:** Kỹ sư tự động hóa\n* **Trạng thái:** Đang làm việc\n\n**Quỹ ngày phép hiện tại:**\n* **Phép năm (Annual Leave):** 12 ngày\n* **Nghỉ ốm (Sick Leave):** 5 ngày\n* **Nghỉ không lương (Unpaid Leave):** 30 ngày\n\nBạn có cần tôi hỗ trợ tạo đơn xin nghỉ phép nào cho nhân viên này không?",
+    "latency_ms": 1938.2
+  },
+  {
+    "step": 1,
+    "query": "Tôi là Nguyễn Văn A, mã nhân viên VF12345. Hãy tạo đơn xin nghỉ phép năm cho tôi vào ngày 25/10/2026.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "create_leave_request",
+    "arguments": {
+      "end_date": "25/10/2026",
+      "employee_id": "VF12345",
+      "start_date": "25/10/2026",
+      "reason": "Nghỉ phép năm",
+      "leave_type": "Phép năm"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "request_id": "REQ-LEAVE-VF12345-99",
+      "employee_id": "VF12345",
+      "leave_type": "Phép năm",
+      "start_date": "25/10/2026",
+      "end_date": "25/10/2026",
+      "reason": "Nghỉ phép năm",
+      "message": "Tạo đơn 'Phép năm' thành công cho nhân viên VF12345 từ ngày 25/10/2026 đến 25/10/2026."
+    },
+    "latency_ms": 1763.84
+  },
+  {
+    "step": 2,
+    "query": "Tôi là Nguyễn Văn A, mã nhân viên VF12345. Hãy tạo đơn xin nghỉ phép năm cho tôi vào ngày 25/10/2026.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào anh Nguyễn Văn A (Mã NV: VF12345),\n\nĐơn xin nghỉ phép năm của anh vào ngày **25/10/2026** đã được hệ thống ghi nhận và xử lý thành công!\n\n**Thông tin chi tiết đơn nghỉ phép:**\n- **Mã đơn:** REQ-LEAVE-VF12345-99\n- **Loại hình:** Phép năm\n- **Thời gian:** Ngày 25/10/2026 (1 ngày)\n- **Lý do:** Nghỉ phép năm\n- **Trạng thái:** Thành công\n\nAnh có cần hỗ trợ thêm thông tin nào khác không ạ? Chúc anh có một ngày nghỉ ngơi vui vẻ!",
+    "latency_ms": 1952.22
+  },
+  {
+    "step": 1,
+    "query": "Tôi (Mã NV: VF12345) muốn xin nghỉ ốm từ ngày 01/11 đến 03/11/2026. Hãy kiểm tra xem tôi còn đủ ngày phép ốm hưởng nguyên lương không, nếu còn hãy tạo đơn giúp tôi.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "check_leave_balance",
+    "arguments": {
+      "employee_id": "VF12345"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "employee_id": "VF12345",
+      "data": {
+        "full_name": "Nguyễn Văn A",
+        "department": "Khối Sản xuất - Xưởng Pin",
+        "position": "Kỹ sư tự động hóa",
+        "email": "a.nv@vinfast.vn",
+        "status": "Đang làm việc",
+        "leave_balance": {
+          "annual_leave": 12,
+          "sick_leave": 5,
+          "unpaid_leave": 30
+        }
+      }
+    },
+    "latency_ms": 1531.05
+  },
+  {
+    "step": 2,
+    "query": "Tôi (Mã NV: VF12345) muốn xin nghỉ ốm từ ngày 01/11 đến 03/11/2026. Hãy kiểm tra xem tôi còn đủ ngày phép ốm hưởng nguyên lương không, nếu còn hãy tạo đơn giúp tôi.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "create_leave_request",
+    "arguments": {
+      "leave_type": "Nghỉ ốm",
+      "end_date": "03/11/2026",
+      "employee_id": "VF12345",
+      "reason": "Nghỉ ốm điều trị bệnh",
+      "start_date": "01/11/2026"
+    },
+    "observation": {
+      "status": "SUCCESS",
+      "request_id": "REQ-LEAVE-VF12345-99",
+      "employee_id": "VF12345",
+      "leave_type": "Nghỉ ốm",
+      "start_date": "01/11/2026",
+      "end_date": "03/11/2026",
+      "reason": "Nghỉ ốm điều trị bệnh",
+      "message": "Tạo đơn 'Nghỉ ốm' thành công cho nhân viên VF12345 từ ngày 01/11/2026 đến 03/11/2026."
+    },
+    "latency_ms": 1571.75
+  },
+  {
+    "step": 3,
+    "query": "Tôi (Mã NV: VF12345) muốn xin nghỉ ốm từ ngày 01/11 đến 03/11/2026. Hãy kiểm tra xem tôi còn đủ ngày phép ốm hưởng nguyên lương không, nếu còn hãy tạo đơn giúp tôi.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào anh Nguyễn Văn A,\n\nTôi đã hoàn tất việc kiểm tra quỹ phép và tạo đơn nghỉ phép cho anh trên hệ thống nhân sự VinFast. Dưới đây là chi tiết kết quả:\n\n1. **Kiểm tra quỹ ngày phép:**\n   - Số ngày phép ốm hiện tại của anh còn lại: **5 ngày** (đủ điều kiện nghỉ từ ngày 01/11/2026 đến 03/11/2026, tổng cộng 3 ngày).\n\n2. **Kết quả tạo đơn:**\n   - **Mã đơn:** `REQ-LEAVE-VF12345-99`\n   - **Loại hình:** Nghỉ ốm\n   - **Thời gian:** Từ ngày 01/11/2026 đến 03/11/2026\n   - **Lý do:** Nghỉ ốm điều trị bệnh\n   - **Trạng thái:** Tạo đơn thành công trên hệ thống.\n\nAnh vui lòng nộp giấy chứng nhận nghỉ việc hưởng bảo hiểm xã hội (hoặc giấy khám bệnh của cơ sở y tế) về bộ phận Nhân sự theo đúng quy định để hoàn tất thủ tục hưởng chế độ. Chúc anh mau chóng bình phục!",
+    "latency_ms": 2873.47
+  },
+  {
+    "step": 1,
+    "query": "Kiểm tra giúp tôi số ngày phép năm còn lại của nhân viên mã VF9999999.",
+    "action_type": "TOOL_EXECUTION",
+    "tool_name": "check_leave_balance",
+    "arguments": {
+      "employee_id": "VF9999999"
+    },
+    "observation": {
+      "status": "NOT_FOUND",
+      "message": "Không tìm thấy dữ liệu nhân viên có mã 'VF9999999'"
+    },
+    "latency_ms": 1518.13
+  },
+  {
+    "step": 2,
+    "query": "Kiểm tra giúp tôi số ngày phép năm còn lại của nhân viên mã VF9999999.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Dựa trên kết quả từ hệ thống nhân sự, hiện tại không tìm thấy dữ liệu cho nhân viên có mã **VF9999999**. \n\nBạn vui lòng kiểm tra lại mã nhân viên của mình và cung cấp lại để tôi hỗ trợ tra cứu chính xác số ngày phép năm còn lại nhé!",
+    "latency_ms": 1866.02
   }
 ]
